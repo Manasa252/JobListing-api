@@ -6,7 +6,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://job-listing-self.vercel.app'],
+  //origin: ['http://localhost:3000', 'https://job-listing-self.vercel.app'],
+  origin: '*',
   methods: ["POST", "GET"],
   credentials: true
 }));
