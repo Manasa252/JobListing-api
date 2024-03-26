@@ -5,11 +5,22 @@ const User = require("./models/User");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({
-  origin: ['http://localhost:3000', 'https://job-listing-self.vercel.app'],
-  methods: ["POST", "GET"],
-  credentials: true
-}));
+// app.use(cors({
+//   origin: ['http://localhost:3000', 'https://job-listing-self.vercel.app'],
+//   methods: ["POST", "GET"],
+//   credentials: true
+// }));
+// app.use(express.json());
+// CORS middleware
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://job-listing-self.vercel.app'); 
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  next();
+});
+
+// Other middleware and configurations
 app.use(express.json());
 
 mongoose.connect("mongodb://127.0.0.1:27017/LoginDB", {
